@@ -162,7 +162,7 @@ class PyObjectConverter : public Converter<PyObject *> {
                 return DATE;
             } else if (PyTime_Check(o)) {
                 return TIME;
-            } else if (PyList_Check(o) || PyTuple_Check(o) || PySet_Check(o) || PyIter_Check(o)) {
+            } else if (PyList_Check(o) || PyTuple_Check(o) || PySet_Check(o) || (Py_TYPE(o)->tp_iternext != NULL && Py_TYPE(o)->tp_iter != NULL)) {
                 return LIST;
             } else if (PyDict_Check(o)) {
                 return DICT;
